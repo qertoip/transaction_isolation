@@ -1,0 +1,6 @@
+
+db=mysql2 bundle exec rake >&1
+
+db=postgresql bundle exec rake
+
+db=sqlite3 bundle exec rake
