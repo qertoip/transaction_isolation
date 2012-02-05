@@ -1,7 +1,5 @@
 if defined?( ActiveRecord::ConnectionAdapters::PostgreSQLAdapter )
 
-  #require 'active_record/connection_adapters/postgresql_adapter'
-
   module TransactionIsolation
     module ActiveRecord
       module ConnectionAdapters # :nodoc:

@@ -1,7 +1,5 @@
 if defined?( ActiveRecord::ConnectionAdapters::Mysql2Adapter )
 
-  #require 'active_record/connection_adapters/mysql2_adapter'
-
   module TransactionIsolation
     module ActiveRecord
       module ConnectionAdapters # :nodoc:

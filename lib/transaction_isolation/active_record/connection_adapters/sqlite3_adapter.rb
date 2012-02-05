@@ -1,7 +1,5 @@
 if defined?( ActiveRecord::ConnectionAdapters::SQLiteAdapter )
 
-  #require 'active_record/connection_adapters/sqlite3_adapter'
-
   module TransactionIsolation
     module ActiveRecord
       module ConnectionAdapters # :nodoc:
