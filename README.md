@@ -23,7 +23,7 @@ Then run:
  * Setting transaction isolation level (:read_uncommitted, :read_committed, :repeatable_read, :serializable)
  * Auto-reverting to the original isolation level after the block
  * Database agnostic
- * MySQL2, PostgreSQL and SQLite3 database connection adapters supported
+ * MySQL2, [soon also PostgreSQL and SQLite3] database connection adapters supported
  * Use it in your Rails application or a standalone ActiveRecord-based project
 
 ## Real world example
@@ -33,26 +33,31 @@ Wrapping your code in a transaction is not enough because by default databases d
 which leads to occasional phantom reads. It is therefore necessary to manually raise the transaction isolation level.
 The highest level of transaction isolation is called "serializable".
 
-[Read about isolation levels in Wikipedia](http://en.wikipedia.org/wiki/Isolation_(database_systems))
+[Read about isolation levels in Wikipedia](http://tinyurl.com/nrqjbb)
 
-    ActiveRecord::Base.isolation_level( :serializable ) do
-      ActiveRecord::Base.transaction do
-        queued_job = find_by_status( TODO )
-        if queud_job
-          queued_job.update_attribute( :status, PROCESSING )
-          return queued_job
-        else
-          return nil
+    class QueuedJob < ActiveRecord::Base
+
+      # Job status
+      TODO = 1
+      PROCESSING = 2
+      DONE = 3
+
+      # Returns first job from the queue or nil if the queue is empty
+      def pop
+        QueuedJob.isolation_level( :serializable ) do
+          QueuedJob.transaction do
+            queued_job = find_by_status( TODO )
+            if queud_job
+              queued_job.update_attribute( :status, PROCESSING )
+              return queued_job
+            else
+              return nil
+            end
+          end
         end
       end
+
     end
-
-
-## Usage
-
-    $( '.editable' ).editable( {
-      type: 'datepicker'
-    } );
 
 ## Requirements
 
