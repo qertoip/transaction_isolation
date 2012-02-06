@@ -18,6 +18,14 @@ Then run:
 
     bundle
 
+__With Rails it works out of the box__.
+
+If you have a standalone ActiveRecord-based project you'll need to call:
+
+    TransactionIsolation.apply_activerecord_patch     # after connecting to the database
+
+__after__ connecting to the database. This is because ActiveRecord loads adapters lazilly and only then they can be patched.
+
 ## Features
 
  * Setting transaction isolation level (:read_uncommitted, :read_committed, :repeatable_read, :serializable)

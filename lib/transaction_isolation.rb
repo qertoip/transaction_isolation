@@ -1,3 +1,4 @@
+require "active_record"
 require_relative 'transaction_isolation/version'
 
 module TransactionIsolation
@@ -21,10 +22,6 @@ module TransactionIsolation
         TransactionIsolation.apply_activerecord_patch
       end
     end
-  else
-    # Without Rails we can apply the patch outright. It is programmer responsibility
-    # to require the transaction_isolation gem *after* connecting to the database.
-    TransactionIsolation.apply_activerecord_patch
   end
   
 end

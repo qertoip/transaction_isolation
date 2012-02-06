@@ -18,3 +18,5 @@ TransactionIsolation::Test::Migrations.run!
 
 # Load the code that will be tested
 require 'transaction_isolation'
+
+TransactionIsolation.apply_activerecord_patch
