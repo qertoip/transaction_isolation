@@ -1,5 +1,5 @@
 
-db=mysql2 bundle exec rake >&1
+db=mysql2 bundle exec rake
 
 db=postgresql bundle exec rake
 
