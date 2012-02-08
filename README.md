@@ -1,6 +1,8 @@
 # transaction_isolation
 
-Adds support for setting transaction isolation level in ActiveRecord in a database agnostic way.
+Set transaction isolation level in the ActiveRecord in a database agnostic way.
+Works with MySQL, PostgreSQL and SQLite as long as you are using new adapters mysql2, pg or sqlite3.
+Supports all ANSI SQL isolation levels: :serializable, :repeatable_read, :read_committed, :read_uncommitted.
 
 ## Example
 
@@ -18,7 +20,7 @@ Then run:
 
     bundle
 
-__With Rails it works out of the box__.
+__It works out of the box with Ruby on Rails__.
 
 If you have a standalone ActiveRecord-based project you'll need to call:
 
@@ -28,21 +30,23 @@ __after__ connecting to the database. This is because ActiveRecord loads adapter
 
 ## Features
 
- * Setting transaction isolation level (:read_uncommitted, :read_committed, :repeatable_read, :serializable)
+ * Setting transaction isolation level: :serializable, :repeatable_read, :read_committed, :read_uncommitted
  * Auto-reverting to the original isolation level after the block
  * Database agnostic
- * MySQL2, PostgreSQL and SQLite3 database connection adapters supported
+ * MySQL, PostgreSQL and SQLite supported
  * Exception translation. All deadlocks and serialization errors are wrapped in a ActiveRecord::TransactionIsolationConflict exception
  * Use it in your Rails application or a standalone ActiveRecord-based project
+
+## Testimonials
+
+This gem was initially developed for and successfully works in production at [Kontomierz.pl](http://kontomierz.pl) - the finest Polish personal finance app.
 
 ## Real world example
 
 When implementing a table-based job queue you should ensure that only one worker process can pop a particular job from the queue.
 Wrapping your code in a transaction is not enough because by default databases do not isolate transactions to the full extent,
 which leads to occasional phantom reads. It is therefore necessary to manually raise the transaction isolation level.
-The highest level of transaction isolation is called "serializable".
-
-[Read about isolation levels in Wikipedia](http://tinyurl.com/nrqjbb)
+The highest level of transaction isolation is called "serializable" and that's what we need here:
 
     class QueuedJob < ActiveRecord::Base
 
@@ -64,14 +68,19 @@ The highest level of transaction isolation is called "serializable".
             end
           end
         end
+      rescue ActiveRecord::TransactionConflictError => e
+        logger.warn( e.message )
+        retry
       end
 
     end
 
+[Read more about isolation levels in Wikipedia](http://tinyurl.com/nrqjbb)
+
 ## Requirements
 
- * Ruby 1.9
- * ActiveRecord 3.1+
+ * Ruby 1.9.2
+ * ActiveRecord 3.0.11+
 
 ## Running tests
 

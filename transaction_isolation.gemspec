@@ -9,7 +9,9 @@ Gem::Specification.new do |s|
   s.email       = ["qertoip@gmail.com"]
   s.homepage    = "https://github.com/qertoip/transaction_isolation"
   s.summary     = %q{Set transaction isolation level in the ActiveRecord in a database agnostic way.}
-  s.description = %q{Set transaction isolation level in the ActiveRecord in a database agnostic way. Works with MySQL2, PostgreSQL and SQLite3 for all ANSI isolation levels: :serializable, :repeatable_read, :read_committed, :read_uncommitted.}
+  s.description = %q{Set transaction isolation level in the ActiveRecord in a database agnostic way.
+Works with MySQL, PostgreSQL and SQLite as long as you are using new adapters mysql2, pg or sqlite3.
+Supports all ANSI SQL isolation levels: :serializable, :repeatable_read, :read_committed, :read_uncommitted.}
   s.required_ruby_version = '>= 1.9.2'
   
   s.files         = `git ls-files`.split("\n")

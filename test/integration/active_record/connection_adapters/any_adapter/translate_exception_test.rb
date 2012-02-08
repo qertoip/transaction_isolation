@@ -34,13 +34,7 @@ class ActiveRecordTest < MiniTest::Unit::TestCase
             translated_exception = ActiveRecord::Base.connection.send( :translate_exception, StandardError.new( message ), message )
             assert_equal( ActiveRecord::TransactionIsolationConflict, translated_exception.class )
           end
-          
-          #  assert_equal( :read_committed, ActiveRecord::Base.connection.current_isolation_level )
-          #end
-          #
-          #if defined?( ActiveRecord::ConnectionAdapters::SQLite3Adapter )
-          #  assert_equal( :serializable, ActiveRecord::Base.connection.current_isolation_level )
-          #end
+
         end
 
       end

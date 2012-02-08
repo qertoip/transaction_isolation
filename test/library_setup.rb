@@ -19,4 +19,7 @@ TransactionIsolation::Test::Migrations.run!
 # Load the code that will be tested
 require 'transaction_isolation'
 
+require 'logger'
+ActiveRecord::Base.logger = Logger.new( File.expand_path( "#{File.dirname( __FILE__ )}/log/test.log" ) )
+
 TransactionIsolation.apply_activerecord_patch
