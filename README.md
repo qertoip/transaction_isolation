@@ -71,7 +71,7 @@ The highest level of transaction isolation is called "serializable" and that's w
             end
           end
         end
-      rescue ActiveRecord::TransactionConflictError => e
+      rescue ActiveRecord::TransactionIsolationConflict => e
         logger.warn( e.message )
         retry
       end
