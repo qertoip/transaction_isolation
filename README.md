@@ -4,6 +4,9 @@ Set transaction isolation level in the ActiveRecord in a database agnostic way.
 Works with MySQL, PostgreSQL and SQLite as long as you are using new adapters mysql2, pg or sqlite3.
 Supports all ANSI SQL isolation levels: :serializable, :repeatable_read, :read_committed, :read_uncommitted.
 
+See also [transaction_retry](https://github.com/qertoip/transaction_retry) gem for auto-retrying transactions 
+on deadlocks and serialization errors.
+
 ## Example
 
     ActiveRecord::Base.isolation_level( :serializable ) do
@@ -68,7 +71,7 @@ The highest level of transaction isolation is called "serializable" and that's w
             end
           end
         end
-      rescue ActiveRecord::TransactionConflictError => e
+      rescue ActiveRecord::TransactionIsolationConflict => e
         logger.warn( e.message )
         retry
       end
