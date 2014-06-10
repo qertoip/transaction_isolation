@@ -1,4 +1,4 @@
-if defined?( ActiveRecord::ConnectionAdapters::SQLiteAdapter )
+if defined?( ActiveRecord::ConnectionAdapters::SQLite3Adapter )
 
   module TransactionIsolation
     module ActiveRecord

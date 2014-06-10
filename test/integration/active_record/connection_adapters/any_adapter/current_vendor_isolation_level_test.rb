@@ -2,13 +2,13 @@
 
 require 'test_helper'
 
-class ActiveRecordTest < MiniTest::Unit::TestCase
+class ActiveRecordTest < Minitest::Test
 
-  class ConnectionAdaptersTest < MiniTest::Unit::TestCase
+  class ConnectionAdaptersTest < Minitest::Test
 
-    class AnyAdapterTest < MiniTest::Unit::TestCase
+    class AnyAdapterTest < Minitest::Test
 
-      class CurrentVendorIsolationLevelTest < MiniTest::Unit::TestCase
+      class CurrentVendorIsolationLevelTest < Minitest::Test
 
         def test_returns_correct_default_vendor_isolation_level
           if defined?( ActiveRecord::ConnectionAdapters::Mysql2Adapter )

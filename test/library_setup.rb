@@ -11,7 +11,7 @@ case ENV['db']
   when 'sqlite3'
     TransactionIsolation::Test::Db.connect_to_sqlite3
   else
-    TransactionIsolation::Test::Db.connect_to_mysql2
+    TransactionIsolation::Test::Db.connect_to_sqlite3
 end
 
 TransactionIsolation::Test::Migrations.run!

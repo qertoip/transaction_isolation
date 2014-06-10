@@ -2,13 +2,13 @@
 
 require 'test_helper'
 
-class ActiveRecordTest < MiniTest::Unit::TestCase
+class ActiveRecordTest < Minitest::Test
 
-  class ConnectionAdaptersTest < MiniTest::Unit::TestCase
+  class ConnectionAdaptersTest < Minitest::Test
 
-    class AnyAdapterTest < MiniTest::Unit::TestCase
+    class AnyAdapterTest < Minitest::Test
 
-      class TranslateExceptionTest < MiniTest::Unit::TestCase
+      class TranslateExceptionTest < Minitest::Test
 
         def test_does_not_break_existing_translation
           assert_raises( ActiveRecord::StatementInvalid ) do

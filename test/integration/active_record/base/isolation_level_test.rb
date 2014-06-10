@@ -2,11 +2,11 @@
 
 require 'test_helper'
 
-class ActiveRecordTest < MiniTest::Unit::TestCase
+class ActiveRecordTest < Minitest::Test
 
-  class BaseTest < MiniTest::Unit::TestCase
+  class BaseTest < Minitest::Test
 
-    class IsolationLevelTest < MiniTest::Unit::TestCase
+    class IsolationLevelTest < Minitest::Test
 
       def test_wraps_connection_isolation_level
         ActiveRecord::Base.isolation_level( :serializable ) do

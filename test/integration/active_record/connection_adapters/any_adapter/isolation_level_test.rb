@@ -2,13 +2,13 @@
 
 require 'test_helper'
 
-class ActiveRecordTest < MiniTest::Unit::TestCase
+class ActiveRecordTest < Minitest::Test
 
-  class ConnectionAdaptersTest < MiniTest::Unit::TestCase
+  class ConnectionAdaptersTest < Minitest::Test
 
-    class AnyAdapterTest < MiniTest::Unit::TestCase
+    class AnyAdapterTest < Minitest::Test
 
-      class IsolationLevelTest < MiniTest::Unit::TestCase
+      class IsolationLevelTest < Minitest::Test
 
         def test_without_a_block
           original_isolation_level = ActiveRecord::Base.connection.current_isolation_level
