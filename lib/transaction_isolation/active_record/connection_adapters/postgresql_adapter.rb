@@ -54,7 +54,7 @@ if defined?( ActiveRecord::ConnectionAdapters::PostgreSQLAdapter )
 
           def translate_exception_with_transaction_isolation_conflict( exception, message )
             if isolation_conflict?( exception )
-              ::ActiveRecord::TransactionIsolationConflict.new( "Transaction isolation conflict detected: #{exception.message}", exception )
+              ::ActiveRecord::TransactionIsolationConflict.new( "Transaction isolation conflict detected: #{exception.message}" )
             else
               translate_exception_without_transaction_isolation_conflict( exception, message )
             end
