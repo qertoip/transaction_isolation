@@ -6,5 +6,11 @@ module ActiveRecord
   # Serialization conflicts happen when db engine is using multi-version concurrency control.
   # Often db engines combine both approaches and thus generate both types of errors.
 
-  class TransactionIsolationConflict < ::ActiveRecord::WrappedDatabaseException; end
+  class TransactionIsolationConflict < ::ActiveRecord::WrappedDatabaseException
+    if ActiveSupport::VERSION::MAJOR == 3
+      def initialize message, original_exception = nil
+        super(message, original_exception)
+      end
+    end
+  end
 end
