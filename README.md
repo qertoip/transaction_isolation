@@ -1,3 +1,6 @@
+NO LONGER SUPPORTED - PLEASE FORK OR SEEK OTHER SOLUTIONS
+
+
 # transaction_isolation
 
 Set transaction isolation level in the ActiveRecord in a database agnostic way.
