@@ -13,6 +13,7 @@ Gem::Specification.new do |s|
 Works with MySQL, PostgreSQL and SQLite as long as you are using new adapters mysql2, pg or sqlite3.
 Supports all ANSI SQL isolation levels: :serializable, :repeatable_read, :read_committed, :read_uncommitted.}
   s.required_ruby_version = '>= 1.9.2'
+  s.license     = "MIT"
   
   s.files         = `git ls-files`.split("\n")
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
