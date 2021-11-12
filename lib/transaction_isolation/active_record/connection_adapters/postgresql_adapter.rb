@@ -60,10 +60,20 @@ if defined?( ActiveRecord::ConnectionAdapters::PostgreSQLAdapter )
             end
           end
           
+          SERIALIZATION_FAILURE = '40001' # See https://github.com/rails/rails/blob/v6.0.3.1/activerecord/lib/active_record/connection_adapters/postgresql_adapter.rb#L476.
+          DEADLOCK_DETECTED     = '40P01' # See https://github.com/rails/rails/blob/v6.0.3.1/activerecord/lib/active_record/connection_adapters/postgresql_adapter.rb#L477.
+          
           def isolation_conflict?( exception )
-            [ "deadlock detected",
-              "could not serialize access" ].any? do |error_message|
-              exception.message =~ /#{Regexp.escape( error_message )}/i
+            case exception.result.try(:error_field, PG::PG_DIAG_SQLSTATE)
+              when SERIALIZATION_FAILURE
+                true
+              when DEADLOCK_DETECTED
+                true
+              else
+                [ "deadlock detected",
+                  "could not serialize access" ].any? do |error_message|
+                  exception.message =~ /#{Regexp.escape( error_message )}/i
+                end
             end
           end
 
