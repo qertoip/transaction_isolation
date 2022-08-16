@@ -30,12 +30,17 @@ if defined?( ActiveRecord::ConnectionAdapters::Mysql2Adapter )
               'SERIALIZABLE' => :serializable
           }
           
+          @@version = nil
+          
+          VERSION_ISOL_LEVEL = -> (version) { version >= 8 ? "transaction_isolation" : "tx_isolation" }
+          
           def current_isolation_level
             ANSI_ISOLATION_LEVEL[current_vendor_isolation_level]
           end
           
           def current_vendor_isolation_level
-            select_value( "SELECT @@session.tx_isolation" ).gsub( '-', ' ' )
+            @@version ||= execute("SELECT VERSION()").first[0].to_i
+            select_value( "SELECT @@session.#{VERSION_ISOL_LEVEL[@@version]}" ).gsub( '-', ' ' )
           end
           
           def isolation_level( level )

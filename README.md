@@ -1,5 +1,6 @@
 NO LONGER MAINTAINED - PLEASE FORK OR SEEK OTHER SOLUTIONS
 
+This is a fork from [qertoip](https://github.com/qertoip/transaction_isolation), I just needed to support MySQL 8
 
 # transaction_isolation
 
